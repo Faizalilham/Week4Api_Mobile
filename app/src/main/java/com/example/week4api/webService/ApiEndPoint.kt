@@ -12,7 +12,7 @@ interface ApiEndPoint {
     fun getData():Call<ListResponse<Barang>>
 
     @GET("barang/{id}")
-    fun getDataById(@Path("id")id : Int):Call<SingleResponse<Barang>>
+    fun getDataById(@Path("id")id : Int):Call<ListResponse<Barang>>
 
     @FormUrlEncoded
     @POST("barang")
