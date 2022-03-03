@@ -36,6 +36,14 @@ class MainActivity : AppCompatActivity() {
                 })
             }
 
+            override fun onUpdate(barang: Barang) {
+                startActivity(Intent(this@MainActivity,UpdateActivity::class.java).also{
+                    it.putExtra("id",barang.id)
+                    it.putExtra("nama",barang.nama)
+                    it.putExtra("kode",barang.kode.toString())
+                })
+            }
+
         })
         binding.Recycler.apply {
             adapter = mainAdapater

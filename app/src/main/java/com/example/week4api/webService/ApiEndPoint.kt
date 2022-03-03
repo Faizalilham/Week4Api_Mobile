@@ -19,5 +19,21 @@ interface ApiEndPoint {
     fun PostData(@Field("nama")nama : String,
                  @Field("kode")kode : Int):Call<SingleResponse<Barang>>
 
+    @FormUrlEncoded
+    @PUT("barang/{id}")
+    fun UpdateBarang(@Path("id")id:Int,
+                     @Field("nama")nama :String,
+                     @Field("kode")kode :Int):Call<SingleResponse<Barang>>
+
+    @DELETE("barang/{id}")
+    fun DeleteBarang(@Path("id")id:Int):Call<Void>
+
+
+
+
+
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.week4api
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -20,6 +21,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getData()
+        DeleteData()
     }
 
     private fun setData(barang: List<Barang>){
@@ -44,6 +46,36 @@ class DetailActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    private fun DeleteData(){
+        binding.BtnDelete.setOnClickListener {
+            APIService.ApiEndPoint().DeleteBarang(intent.getIntExtra("id",0))
+                .enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Data berhasil terhapus",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(
+                                Intent(
+                                    this@DetailActivity,
+                                    MainActivity::class.java
+                                ).also {
+                                    finish()
+                                })
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        Toast.makeText(applicationContext, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+        }
     }
 
 }

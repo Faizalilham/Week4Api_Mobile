@@ -12,6 +12,7 @@ class MainAdapter(var barang: List<Barang>, val listener: AdapterClick) : Recycl
 
     interface AdapterClick{
         fun onRead(barang: Barang)
+        fun onUpdate(barang :Barang)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,6 +24,9 @@ class MainAdapter(var barang: List<Barang>, val listener: AdapterClick) : Recycl
             tvTitle.text = barang[position].nama
             tvTitle.setOnClickListener {
                 listener.onRead(barang[position])
+            }
+            BtnUpdate.setOnClickListener {
+                listener.onUpdate(barang[position])
             }
         }
     }
